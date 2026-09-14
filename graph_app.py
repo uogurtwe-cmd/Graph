@@ -3,22 +3,18 @@ import numpy as np
 import plotly.graph_objects as go
 from sympy import sympify, lambdify, symbols
 
-# Настройка страницы
 st.set_page_config(
     page_title="ГРАФИКЫЫ",
     layout="centered", 
     initial_sidebar_state="collapsed"
 )
-
 st.title("Графк")
 
 st.sidebar.header("Настройки")
-
 formula_input = st.sidebar.text_input(
-    "Введите функцию f(x):", 
+    "Введите функцию", 
     value="x^3 - 3*x"
 )
-
 col1, col2 = st.sidebar.columns(2)
 with col1:
     x_min = st.number_input("X min", value=-10.0, step=1.0)
@@ -27,7 +23,7 @@ with col2:
     x_max = st.number_input("X max", value=10.0, step=1.0)
     y_max = st.number_input("Y max", value=10.0, step=1.0)
 
-keep_aspect_ratio = st.sidebar.checkbox("Сохранять пропорции 1:1", value=True)
+keep_aspect_ratio = st.sidebar.checkbox("", value=True)
 
 if formula_input:
     try:
@@ -46,17 +42,13 @@ if formula_input:
 
         if isinstance(y_vals, (int, float)):
             y_vals = np.full_like(x_vals, float(y_vals))
-
         dy = np.abs(np.diff(y_vals, prepend=y_vals[0]))
         y_vals[dy > (y_max - y_min) * 2] = np.nan
-
         hover_labels = [
-            f"X: {x:.1f}<br>Y: {y:.2f}" if not np.isnan(y) else "Разрыв"
+            f"X: {x:.1f}<br>Y: {y:.2f}" if not np.isnan(y) else ""
             for x, y in zip(x_vals, y_vals)
         ]
-
         fig = go.Figure()
-
         fig.add_trace(go.Scatter(
             x=x_vals, 
             y=y_vals, 
@@ -66,8 +58,6 @@ if formula_input:
             hoverinfo='text',
             hovertext=hover_labels
         ))
-
-        # Оси X=0 и Y=0
         fig.add_hline(y=0, line_width=2, line_color="#FFFFFF", opacity=0.8)
         fig.add_vline(x=0, line_width=2, line_color="#FFFFFF", opacity=0.8)
 
@@ -82,7 +72,7 @@ if formula_input:
             yaxis_dict["scaleratio"] = 1
 
         fig.update_layout(
-            title=f"График функции: y = {formula_input}",
+            title=f"График функции:",
             xaxis=dict(
                 range=[x_min, x_max],
                 zeroline=False,
@@ -101,6 +91,5 @@ if formula_input:
             width="stretch", 
             config={'displayModeBar': False}
         )
-
     except Exception as e:
-        st.error(f"Не удалось построить график. Проверьте правильность введенной формулы.\nДетали ошибки: {e}")
+        st.error(f"Eror")
