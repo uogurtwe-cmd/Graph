@@ -4,11 +4,11 @@ import plotly.graph_objects as go
 from sympy import sympify, lambdify, symbols
 
 st.set_page_config(
-    page_title="ГРАФИКЫЫ",
+    page_title="ГРАФИК",
     layout="centered", 
     initial_sidebar_state="collapsed"
 )
-st.title("Графк")
+st.title("График")
 
 st.sidebar.header("Настройки")
 formula_input = st.sidebar.text_input(
@@ -22,8 +22,6 @@ with col1:
 with col2:
     x_max = st.number_input("X max", value=10.0, step=1.0)
     y_max = st.number_input("Y max", value=10.0, step=1.0)
-
-keep_aspect_ratio = st.sidebar.checkbox("", value=True)
 
 if formula_input:
     try:
