@@ -23,8 +23,7 @@ with col1:
 with col2:
     x_max = st.number_input("X max", value=10.0, step=1.0)
     y_max = st.number_input("Y max", value=10.0, step=1.0)
-keep_aspect_ratio = sidebar.checkbox("", value = true)
-keep_aspect_ratio = "hide"
+keep_aspect_ratio = true
 
 if formula_input:
     try:
