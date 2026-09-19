@@ -69,7 +69,7 @@ if formula_input:
         )
         if keep_aspect_ratio:
             yaxis_dict["scaleanchor"] = "x"
-            yaxis_dict["scaleratio"] = 1
+            yaxis_dict["scaleratio"] = 2
 
         fig.update_layout(
             title=f"График функции:",
@@ -93,3 +93,4 @@ if formula_input:
         )
     except Exception as e:
         st.error(f"Eror")
+print("end")
